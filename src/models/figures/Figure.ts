@@ -19,9 +19,12 @@ export class Figure {
         this.id = Math.random()
     }
 
-    canMove(target: Cell): boolean {
-        return true
+    canMove(target: Cell) : boolean {
+        if(target.figure?.color === this.color) return false // can't eat your figures
+        if(target.figure?.name === FigureNames.KING) return false // The King can't be removed from a playfield
+        return true;
     }
+
 
     moveFigure(target: Cell) {
 

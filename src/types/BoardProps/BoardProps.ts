@@ -4,6 +4,6 @@ import { Player } from "../../models/Player";
 export interface BoardProps {
     board: Board;
     setBoard: (board: Board) => void;
-    currentPlayer: Player | null;
+    currentPlayer?: Player | null;
     swapPlayer?: () => void;
 }

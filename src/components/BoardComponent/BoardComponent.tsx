@@ -4,17 +4,18 @@ import { BoardProps } from "../../types/BoardProps/BoardProps";
 import CellComponent from "../CellComponent/CellComponent";
 
 const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPlayer }) => {
-    const [selectedCell, setSelectedCell] = useState<Cell | null>();
+    const [selectedCell, setSelectedCell] = useState<Cell | null>(null);
 
     function click(cell: Cell) {
         if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
+            // choosing where to move available
             selectedCell.moveFigure(cell);
-            swapPlayer()
+            // swapPlayer()
             setSelectedCell(null);
-            updateBoard()
+            // updateBoard()
         } else {
             if (cell.figure?.color === currentPlayer?.color) {
-                setSelectedCell(cell);
+               setSelectedCell(cell);
             }
         }
     }
@@ -23,11 +24,14 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
         highlightCells()
     }, [selectedCell])
 
+    // to move figures
+
     function highlightCells() {
         board.highlightCells(selectedCell)
         updateBoard()
     }
 
+    // to update board
     function updateBoard() {
         const newBoard = board.getCopyBoard()
         setBoard(newBoard)
