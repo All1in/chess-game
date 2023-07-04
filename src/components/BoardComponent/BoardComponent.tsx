@@ -10,9 +10,9 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
         if (selectedCell && selectedCell !== cell && selectedCell.figure?.canMove(cell)) {
             // choosing where to move available
             selectedCell.moveFigure(cell);
-            // swapPlayer()
+            swapPlayer()
             setSelectedCell(null);
-            // updateBoard()
+            updateBoard()
         } else {
             if (cell.figure?.color === currentPlayer?.color) {
                setSelectedCell(cell);
@@ -37,21 +37,25 @@ const BoardComponent: FC<BoardProps> = ({ board, setBoard, currentPlayer, swapPl
         setBoard(newBoard)
     }
 
+    // console.log('currentPlayer', currentPlayer)
 
     return (
-        <div className="board">
-            {board.cells.map((row, index) =>
-                <Fragment key={index}>
-                    {row.map(cell =>
-                        <CellComponent
-                            click={click}
-                            cell={cell}
-                            key={cell.id} // randomly generated
-                            selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
-                        />
-                    )}
-                </Fragment>
-            )}
+        <div>
+            <h3> Current player: { currentPlayer?.color } </h3>
+            <div className="board">
+                {board.cells.map((row, index) =>
+                    <Fragment key={index}>
+                        {row.map(cell =>
+                            <CellComponent
+                                click={click}
+                                cell={cell}
+                                key={cell.id} // randomly generated
+                                selected={cell.x === selectedCell?.x && cell.y === selectedCell?.y}
+                            />
+                        )}
+                    </Fragment>
+                )}
+            </div>
         </div>
     );
 };

@@ -1,7 +1,6 @@
 import { FC } from "react";
 import { CellProps } from "../../types/CellProps/CellProps";
 
-
 const CellComponent: FC<CellProps> = ({ cell, selected, click}) => {
     // console.log('cell', cell)
     return (

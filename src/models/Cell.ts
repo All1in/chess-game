@@ -25,6 +25,13 @@ export class Cell {
         return this.figure === null;
     }
 
+    isEnemy(target: Cell): boolean {
+        if (target.figure) {
+            return this.figure?.color !== target.figure.color;
+        }
+        return false;
+    }
+
     // target argument is the point where we want to move
     isEmptyVertical(target: Cell): boolean {
         if (this.x !== target.x) {
@@ -61,10 +68,34 @@ export class Cell {
         return true;
     }
 
+    isEmptyDiagonal(target: Cell): boolean {
+        const absX = Math.abs(target.x - this.x);
+        const absY = Math.abs(target.y - this.y);
+        if(absY !== absX) return false;
+
+        const dy = this.y < target.y ? 1 : -1
+        const dx = this.x < target.x ? 1 : -1
+
+        for (let i = 1; i < absY; i++) {
+            if(!this.board.getCell(this.x + dx*i, this.y + dy * i).isEmpty()) return false;
+        }
+        return true;
+    }
+
+    addLostFigure(figure: Figure) {
+        figure.color === Colors.BLACK
+            ? this.board.lostBlackFigures.push(figure)
+            : this.board.lostWhiteFigures.push(figure)
+    }
+
     moveFigure(target: Cell) {
         if(this.figure && this.figure?.canMove(target)) {
-            this.figure.moveFigure(target);
-            target.figure = this.figure;
+            this.figure.moveFigure(target)
+            if (target.figure) {
+                console.log(target.figure)
+                this.addLostFigure(target.figure);
+            }
+            target.setFigure(this.figure);
             this.figure = null;
         }
     }
