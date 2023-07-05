@@ -1,4 +1,4 @@
-# WEBPACK-config-project
+# React TypeScript Chess Game
 
 <div align="center">
    <img height="auto" width="90%" src="https://images.unsplash.com/photo-1523875194681-bedd468c58bf?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1742&q=80" alt="image"/>
